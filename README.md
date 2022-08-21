@@ -1,7 +1,35 @@
-# Здесь будет ваш проект на Реакте с авторизацией и регистрацией
+# Проект: Место
 
-Используйте ваши предыдущие наработки по проекту Mesto. Это может быть работа 11-го спринта или его улучшенная версия после 2-х последних спринтов. 
+## Описание
 
-Все запросы на авторизацию, регистрацию и проверку токена должны работать через сервис `https://auth.nomoreparties.co`. Остальные запросы, не относящиеся к этой проектной работе могут быть к бэкенду из предыдущих спринтов.
+Сайт куда можно добавлять фотографии, удалять их и ставить лайки. [Ссылка на макет в Figma](https://www.figma.com/file/PSdQFRHoxXJFs2FH8IXViF/JavaScript.-Sprint-9)
 
-Успехов!
+## Технологии в проекте
+
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-ffd24a?style=for-the-badge&logo=javascript&logoColor=white) ![React](https://img.shields.io/badge/-ReactJs-61DAFB?logo=react&logoColor=white&style=for-the-badge)
+
+## Установка
+
+``` shell
+npm install
+```
+
+## Запуск
+
+``` shell
+npm start
+```
+
+Приложение «Место» загрузится на http://localhost:3000.
+
+## Сборка приложения
+
+``` shell
+npm run build
+```
+
+Это создаст папку dist со скомпилированными и свернутыми компонентами.
+
+## Авторы
+
+Сделано в рамках прохождения курса **Веб-разработчик** Яндекс Практикум
