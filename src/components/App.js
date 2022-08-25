@@ -1,27 +1,29 @@
 import { useState } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
+import { routes } from '../constants';
 import { Layout } from './Layout';
+import { Login } from './Login';
 import { ProtectedRoute } from './ProtectedRoute'; // импортируем HOC
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   return (
     <Switch>
-      <Route path="/sign-up">
+      <Route path={routes.SIGN_UP}>
         <div>Контейнер регистрации пользователя</div>
       </Route>
-      <Route path="/sign-in">
-        <div>Контейнер авторизации пользователя</div>
+      <Route path={routes.SIGN_IN}>
+        <Login />
       </Route>
-      <ProtectedRoute
-          path="/"
-          loggedIn={loggedIn}
-          component={Layout}
-        />
+      <ProtectedRoute path="/" loggedIn={loggedIn} component={Layout} />
       <Route>
-        {!loggedIn ? <Redirect to="/sign-up" /> : <Redirect to="/sign-in" />}
+        {!loggedIn ? (
+          <Redirect to={routes.SIGN_UP} />
+        ) : (
+          <Redirect to={routes.SIGN_IN} />
+        )}
       </Route>
     </Switch>
   );
