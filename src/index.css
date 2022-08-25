@@ -20,6 +20,8 @@
 @import url('./blocks/entry/__input/entry__input.css');
 @import url('./blocks/entry/__button/entry__button.css');
 @import url('./blocks/entry/__field/entry__field.css');
+@import url('./blocks/entry/__link/entry__link.css');
+@import url('./blocks/entry/__link_type_redirect/entry__link_type_redirect.css');
 /* profile */
 @import url('./blocks/profile/profile.css');
 @import url('./blocks/profile/__avatar/profile__avatar.css');

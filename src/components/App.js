@@ -4,6 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { routes } from '../constants';
 import { Layout } from './Layout';
 import { Login } from './Login';
+import { Register } from './Register';
 import { ProtectedRoute } from './ProtectedRoute'; // импортируем HOC
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
   return (
     <Switch>
       <Route path={routes.SIGN_UP}>
-        <div>Контейнер регистрации пользователя</div>
+        <Register />
       </Route>
       <Route path={routes.SIGN_IN}>
         <Login />
