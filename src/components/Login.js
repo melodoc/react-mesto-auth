@@ -1,6 +1,7 @@
 import { routes, inputType } from '../constants';
 import { Input } from '../shared-components/Input';
 import { Header } from './Header';
+import { InfoTooltip } from './InfoTooltip';
 
 export function Login() {
   const handleChangeName = () => {};
@@ -9,6 +10,11 @@ export function Login() {
 
   return (
     <>
+      {/* <InfoTooltip
+        isOpened={true}
+        onClose={onSubmit}
+        isSuccess={true}
+      /> */}
       <Header label="Регистрация" route={routes.SIGN_UP} />
       <div className="entry">
         <h2 className="entry__title">Вход</h2>
