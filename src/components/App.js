@@ -12,13 +12,13 @@ function App() {
 
   return (
     <Switch>
+      <ProtectedRoute exact path="/" loggedIn={loggedIn} component={Layout} />
       <Route path={routes.SIGN_UP}>
         <Register />
       </Route>
       <Route path={routes.SIGN_IN}>
         <Login />
       </Route>
-      <ProtectedRoute path="/" loggedIn={loggedIn} component={Layout} />
       <Route>
         {!loggedIn ? (
           <Redirect to={routes.SIGN_UP} />

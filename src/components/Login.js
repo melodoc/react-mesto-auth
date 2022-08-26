@@ -15,7 +15,12 @@ export function Login() {
         onClose={onSubmit}
         isSuccess={true}
       /> */}
-      <Header label="Регистрация" route={routes.SIGN_UP} />
+      <Header
+        entry={{
+          label: 'Регистрация',
+          route: routes.SIGN_UP
+        }}
+      />
       <div className="entry">
         <h2 className="entry__title">Вход</h2>
         <form className="entry__form" name="entry__form" onSubmit={onSubmit}>
