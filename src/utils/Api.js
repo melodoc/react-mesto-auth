@@ -1,6 +1,6 @@
-import { requestParams } from '../constants';
+import { baseRequestParams, authRequestParams } from '../constants';
 
-export class Api {
+class BaseApi {
   constructor({ baseUrl, headers }) {
     this.baseUrl = baseUrl;
     this.headers = headers;
@@ -25,7 +25,9 @@ export class Api {
       return Promise.reject(`Ошибка: ${res.status}`);
     });
   }
+}
 
+class Api extends BaseApi {
   getUserInformation() {
     return this._fetchHandle(this._methods.GET, '/users/me');
   }
@@ -71,4 +73,23 @@ export class Api {
   }
 }
 
-export const apiClient = new Api(requestParams);
+class AuthApi extends BaseApi {
+  signup(email, password) {
+    console.info(this.baseUrl, this.headers);
+    return this._fetchHandle(this._methods.POST, '/signup', {
+      email,
+      password
+    });
+  }
+
+  signin(email, password) {
+    return this._fetchHandle(this._methods.POST, '/signin', {
+      email,
+      password
+    });
+  }
+}
+
+export const apiClient = new Api(baseRequestParams);
+
+export const authApiClient = new AuthApi(authRequestParams);

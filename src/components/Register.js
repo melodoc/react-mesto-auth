@@ -2,12 +2,25 @@ import { Link } from 'react-router-dom';
 
 import { routes, inputType } from '../constants';
 import { Input } from '../shared-components/Input';
+import { authApiClient } from '../utils/Api';
 import { Header } from './Header';
 
 export function Register() {
   const handleChangeName = () => {};
   const handleChangeDescription = () => {};
-  const onSubmit = () => {};
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    authApiClient
+      .signup('email@email.ru', 'test')
+      .then((res) => {
+        console.info(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   return (
     <>
@@ -39,7 +52,7 @@ export function Register() {
             Зарегистрироваться
           </button>
           <span className="entry__link">
-            Уже зарегистрированы?
+            Уже зарегистрированы?&nbsp;
             <Link to={routes.SIGN_IN} className="entry__link_type_redirect">
               Войти
             </Link>
