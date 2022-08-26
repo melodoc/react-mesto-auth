@@ -10,8 +10,18 @@
 @import url('./blocks/header/header.css');
 @import url('./blocks/header/__link/header__link.css');
 @import url('./blocks/header/__logo/header__logo.css');
+@import url('./blocks/header/__button/header__button.css');
 /* main */
 @import url('./blocks/main/main.css');
+/* entry form */
+@import url('./blocks/entry/entry.css');
+@import url('./blocks/entry/__title/entry__title.css');
+@import url('./blocks/entry/__form/entry__form.css');
+@import url('./blocks/entry/__input/entry__input.css');
+@import url('./blocks/entry/__button/entry__button.css');
+@import url('./blocks/entry/__field/entry__field.css');
+@import url('./blocks/entry/__link/entry__link.css');
+@import url('./blocks/entry/__link/__link_type_redirect/entry__link_type_redirect.css');
 /* profile */
 @import url('./blocks/profile/profile.css');
 @import url('./blocks/profile/__avatar/profile__avatar.css');
@@ -32,7 +42,6 @@
 @import url('./blocks/card/__image/card__image.css');
 @import url('./blocks/card/__like-button/card__like-button.css');
 @import url('./blocks/card/__like-counter/card__like-counter.css');
-/* TODO: Remove to separate folder */
 @import url('./blocks/card/__like-button_state_active/card__like-button_state_active.css');
 @import url('./blocks/card/__trash-button/card__trash-button.css');
 @import url('./blocks/card/__trash-button_state_hidden/card__trash-button_state_hidden.css');
@@ -51,6 +60,12 @@
 @import url('./blocks/popup/__button/__button_action/popup__button_action_zoom-out.css');
 @import url('./blocks/popup/__button/__button_submit/popup__button_submit_inactive.css');
 @import url('./blocks/popup/__form/popup__form.css');
+@import url('./blocks/popup/__card/popup__card.css');
+@import url('./blocks/popup/__status/popup__status.css');
+@import url('./blocks/popup/__status/__status_state/popup__status_state_failed.css');
+@import url('./blocks/popup/__status/__status_state/popup__status_state_success.css');
+@import url('./blocks/popup/__label/popup__label.css');
+@import url('./blocks/popup/__card-container/popup__card-container.css');
 @import url('./blocks/popup/__heading/popup__heading.css');
 @import url('./blocks/popup/__field/popup__field.css');
 @import url('./blocks/popup/__wrapper/popup__wrapper.css');
