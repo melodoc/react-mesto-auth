@@ -25,16 +25,23 @@ function App() {
     setIsTokenValid(false);
     authApiClient
       .checkValidity(localStorage.getItem('token'))
-      .then(({ data }) => {
-        setEmail(data.email);
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          setIsTokenValid(false);
+        }
+      })
+      .then((res) => {
+        console.info(res);
+        setEmail(res.data.email);
         setLoggedIn(true);
+        setIsTokenValid(true);
         history.push(routes.MAIN);
       })
       .catch((err) => {
         console.info(err);
-      })
-      .finally(() => {
-        setIsTokenValid(true);
+        setIsTokenValid(false);
       });
   }, []);
 

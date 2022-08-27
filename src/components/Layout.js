@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { buttonType } from '../constants';
 import { apiClient } from '../utils/Api';
-import { Header } from './Header';
 import { Main } from './Main';
 import { Footer } from './Footer';
 import { PopupWithForm } from './PopupWithForm';
@@ -14,53 +13,59 @@ import { AddPlacePopup } from './AddPlacePopup';
 
 export function Layout() {
   const [currentUser, setCurrentUser] = useState(null);
-  const [cards, setCards] = useState(null);
+  const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
-    useState(null);
+    useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] =
-    useState(null);
+    useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
-    useState(null);
-  const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(null);
+    useState(false);
+  const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
+
+  const loggedIn = !!localStorage.getItem('token');
 
   useEffect(() => {
-    apiClient
-      .getUserInformation()
-      .then((userInformation) => {
-        setCurrentUser(userInformation ?? {});
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+    if (loggedIn) {
+      apiClient
+        .getUserInformation()
+        .then((userInformation) => {
+          setCurrentUser(userInformation ?? {});
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  }, [loggedIn]);
 
   useEffect(() => {
-    apiClient
-      .getCards()
-      .then((cards) => {
-        setCards(cards);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+    if (loggedIn) {
+      apiClient
+        .getCards()
+        .then((cards) => {
+          setCards(cards);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  }, [loggedIn]);
 
   const handleEditProfileClick = () => {
-    setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
+    setIsEditProfilePopupOpen(true);
   };
 
   const handleAddPlaceClick = () => {
-    setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
+    setIsAddPlacePopupOpen(true);
   };
 
   const handleEditAvatarClick = (event) => {
     event.preventDefault();
-    setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
+    setIsEditAvatarPopupOpen(true);
   };
 
   const handleDeleteConfirmationClick = () => {
-    setIsDeletePopupOpen(!isDeletePopupOpen);
+    setIsDeletePopupOpen(true);
   };
 
   const handleCardClick = (card) => {

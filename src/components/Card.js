@@ -4,7 +4,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 export function Card({ card, onClick, onCardLike, onCardDelete }) {
   const currentUser = useContext(CurrentUserContext);
 
-  const handleClick = () => {
+  const handleImageClick = () => {
     onClick(card);
   };
 
@@ -28,7 +28,7 @@ export function Card({ card, onClick, onCardLike, onCardDelete }) {
   }`;
 
   return (
-    <li className="card">
+    <>
       <button
         className={cardDeleteButtonClassName}
         type="button"
@@ -39,7 +39,7 @@ export function Card({ card, onClick, onCardLike, onCardDelete }) {
         className="card__image"
         alt={card.name}
         src={card.link}
-        onClick={handleClick}
+        onClick={handleImageClick}
       />
       <div className="card__description">
         <h2 className="card__header">{card.name}</h2>
@@ -53,6 +53,6 @@ export function Card({ card, onClick, onCardLike, onCardDelete }) {
           <p className="card__like-counter">{card.likes.length}</p>
         </div>
       </div>
-    </li>
+    </>
   );
 }

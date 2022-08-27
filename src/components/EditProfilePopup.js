@@ -16,6 +16,12 @@ export function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
     setDescription(e.target.value);
   };
 
+  const handleOnClose = () => {
+    onClose();
+    setName(currentUser.name);
+    setDescription(currentUser.about);
+  };
+
   useEffect(() => {
     if (currentUser) {
       setName(currentUser.name);
@@ -37,7 +43,7 @@ export function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
       title="Редактировать профиль"
       name="profile"
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={handleOnClose}
       buttonName={buttonType.SAVE}
       onSubmit={handleSubmit}
     >

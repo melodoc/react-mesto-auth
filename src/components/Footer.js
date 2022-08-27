@@ -1,7 +1,9 @@
 export function Footer() {
   return (
     <footer className="footer">
-      <p className="footer__copyright">© 2022. melodoc</p>
+      <p className="footer__copyright">
+        © {new Date().getFullYear()}. melodoc
+      </p>
     </footer>
   );
 }

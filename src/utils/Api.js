@@ -89,15 +89,15 @@ class Api extends BaseApi {
 }
 
 class AuthApi extends BaseApi {
-  signup(email, password) {
-    return this._fetchHandle(this._methods.POST, '/signup', {
+  signUp(email, password) {
+    return this._fetchHandle(this._methods.POST, '/signUp', {
       email,
       password
     });
   }
 
-  signin(email, password) {
-    return this._fetchHandle(this._methods.POST, '/signin', {
+  signIn(email, password) {
+    return this._fetchHandle(this._methods.POST, '/signIn', {
       email,
       password
     });
@@ -105,9 +105,7 @@ class AuthApi extends BaseApi {
 
   checkValidity(token) {
     if (!token) {
-      return Promise.reject(
-        'Токен не передан или передан не в том формате'
-      );
+      return Promise.reject('Токен не передан');
     }
     return fetch(`${this.baseUrl}/users/me`, {
       method: 'GET',
@@ -115,19 +113,7 @@ class AuthApi extends BaseApi {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       }
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          return Promise.reject(
-            `Ошибка ${res.status}: С токеном что-то не так`
-          );
-        }
-      })
-      .catch((res) => {
-        return Promise.reject(res);
-      });
+    });
   }
 }
 

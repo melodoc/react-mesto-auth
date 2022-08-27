@@ -15,6 +15,19 @@ export function Main({
 }) {
   const currentUser = useContext(CurrentUserContext);
 
+  const cardsElements = cards
+    ? cards.map((card) => (
+        <li className="card" key={card._id}>
+          <Card
+            card={card}
+            onClick={onCardClick}
+            onCardLike={onCardLike}
+            onCardDelete={onCardDelete}
+          />
+        </li>
+      ))
+    : 'Загрузка...';
+
   return (
     <main className="main">
       <section className="profile">
@@ -47,19 +60,7 @@ export function Main({
         />
       </section>
       <section className="photo-grid">
-        <ul className="photo-grid__list">
-          {cards
-            ? cards.map((card) => (
-                <Card
-                  key={card._id}
-                  card={card}
-                  onClick={onCardClick}
-                  onCardLike={onCardLike}
-                  onCardDelete={onCardDelete}
-                />
-              ))
-            : 'Загрузка...'}
-        </ul>
+        <ul className="photo-grid__list">{cardsElements}</ul>
       </section>
     </main>
   );

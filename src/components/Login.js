@@ -9,7 +9,6 @@ export function Login({ onLogin }) {
   const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isErrorMsgShown, setIsErrorMsgShown] = useState(false);
 
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
@@ -23,18 +22,16 @@ export function Login({ onLogin }) {
     e.preventDefault();
 
     authApiClient
-      .signin(email, password)
+      .signIn(email, password)
       .then((signIn) => {
         if (signIn.token) {
           localStorage.setItem('token', signIn.token);
           onLogin(email);
           history.push(routes.MAIN);
         }
-        setIsErrorMsgShown(false);
       })
       .catch((err) => {
         console.error(err);
-        setIsErrorMsgShown(true);
       });
   };
 
@@ -48,11 +45,13 @@ export function Login({ onLogin }) {
       >
         <Input
           name="Email"
+          value={email}
           handleChange={handleChangeEmail}
           type={inputType.EMAIL}
         />
         <Input
           name="Пароль"
+          value={password}
           handleChange={handleChangePassword}
           type={inputType.PASSWORD}
         />
@@ -64,9 +63,6 @@ export function Login({ onLogin }) {
         >
           Войти
         </button>
-        {isErrorMsgShown && (
-          <span className="entry__link">Что-то пошло не так</span>
-        )}
       </form>
     </div>
   );

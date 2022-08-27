@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
 import { routes, inputType } from '../constants';
 import { Input } from '../shared-components/Input';
@@ -7,6 +7,7 @@ import { authApiClient } from '../utils/Api';
 import { InfoTooltip } from './InfoTooltip';
 
 export function Register() {
+  const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isTooltipShown, setIsTooltipShown] = useState(false);
@@ -28,11 +29,11 @@ export function Register() {
     e.preventDefault();
 
     authApiClient
-      .signup(email, password)
+      .signUp(email, password)
       .then((res) => {
         setIsTooltipShown(true);
         setIsTooltipSucceed(true);
-        console.info(res);
+        history.push(routes.SIGN_IN);
       })
       .catch((err) => {
         setIsTooltipShown(true);
@@ -58,10 +59,12 @@ export function Register() {
           <Input
             name="Email"
             handleChange={handleChangeEmail}
+            value={email}
             type={inputType.EMAIL}
           />
           <Input
             name="Пароль"
+            value={password}
             handleChange={handleChangePassword}
             type={inputType.PASSWORD}
           />
