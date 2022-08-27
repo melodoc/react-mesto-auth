@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { routes, inputType } from '../constants';
 import { Input } from '../shared-components/Input';
 
-export function Register({onSubmit}) {
+export function Register({ onSubmit }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -19,7 +19,7 @@ export function Register({onSubmit}) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(email, password);
-  }
+  };
 
   return (
     <>

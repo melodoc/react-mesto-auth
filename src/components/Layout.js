@@ -11,7 +11,7 @@ import { EditProfilePopup } from './EditProfilePopup';
 import { EditAvatarPopup } from './EditAvatarPopup';
 import { AddPlacePopup } from './AddPlacePopup';
 
-export function Layout({loggedIn}) {
+export function Layout({ loggedIn }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
