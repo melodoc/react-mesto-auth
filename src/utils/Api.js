@@ -113,6 +113,12 @@ class AuthApi extends BaseApi {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       }
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        return Promise.reject('Токен не валидный');
+      }
     });
   }
 }

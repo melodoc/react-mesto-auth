@@ -11,7 +11,7 @@ import { EditProfilePopup } from './EditProfilePopup';
 import { EditAvatarPopup } from './EditAvatarPopup';
 import { AddPlacePopup } from './AddPlacePopup';
 
-export function Layout() {
+export function Layout({loggedIn}) {
   const [currentUser, setCurrentUser] = useState(null);
   const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
@@ -22,8 +22,6 @@ export function Layout() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
     useState(false);
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
-
-  const loggedIn = !!localStorage.getItem('token');
 
   useEffect(() => {
     if (loggedIn) {

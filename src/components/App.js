@@ -13,6 +13,7 @@ import { Login } from './Login';
 import { Register } from './Register';
 import { Header } from './Header';
 import { ProtectedRoute } from './ProtectedRoute'; // импортируем HOC
+import { InfoTooltip } from './InfoTooltip';
 
 function App() {
   const history = useHistory();
@@ -20,20 +21,15 @@ function App() {
   const [isTokenValid, setIsTokenValid] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState('');
+  const [isTooltipShown, setIsTooltipShown] = useState(false);
+  const [isTooltipSucceed, setIsTooltipSucceed] = useState(true);
+
+  let token = localStorage.getItem('token');
 
   useEffect(() => {
-    setIsTokenValid(false);
     authApiClient
-      .checkValidity(localStorage.getItem('token'))
+      .checkValidity(token)
       .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          setIsTokenValid(false);
-        }
-      })
-      .then((res) => {
-        console.info(res);
         setEmail(res.data.email);
         setLoggedIn(true);
         setIsTokenValid(true);
@@ -43,20 +39,58 @@ function App() {
         console.info(err);
         setIsTokenValid(false);
       });
-  }, []);
+  }, [token]);
 
   const handleHeaderEntry = () => {
     localStorage.removeItem('token');
     history.push(routes.SIGN_IN);
   };
 
-  const handleLogin = (email) => {
-    setEmail(email);
-    setLoggedIn(true);
+  const handleClose = () => {
+    setIsTooltipShown(false);
+  };
+
+  const handleRegisterSubmit = (email, password) => {
+    authApiClient
+      .signUp(email, password)
+      .then((res) => {
+        setIsTooltipShown(true);
+        setIsTooltipSucceed(true);
+        history.push(routes.SIGN_IN);
+      })
+      .catch((err) => {
+        setIsTooltipShown(true);
+        setIsTooltipSucceed(false);
+        console.error(err);
+      });
+  };
+
+  const handleLoginSubmit = (email, password) => {
+    authApiClient
+      .signIn(email, password)
+      .then((signIn) => {
+        if (signIn.token) {
+          localStorage.setItem('token', signIn.token);
+          token = signIn.token;
+          setEmail(email);
+          setLoggedIn(true);
+          history.push(routes.MAIN);
+        }
+      })
+      .catch((err) => {
+        setIsTooltipShown(true);
+        setIsTooltipSucceed(false);
+        console.error(err);
+      });
   };
 
   return (
     <div className="page">
+      <InfoTooltip
+        isOpened={isTooltipShown}
+        onClose={handleClose}
+        isSuccess={isTooltipSucceed}
+      />
       <Header
         email={email}
         onSignOut={handleHeaderEntry}
@@ -64,10 +98,10 @@ function App() {
       />
       <Switch>
         <Route path={routes.SIGN_UP}>
-          <Register />
+          <Register onSubmit={handleRegisterSubmit} />
         </Route>
         <Route path={routes.SIGN_IN}>
-          <Login onLogin={handleLogin} />
+          <Login onLogin={handleLoginSubmit} />
         </Route>
         {!isTokenValid ? (
           <Redirect to={routes.SIGN_IN} />
