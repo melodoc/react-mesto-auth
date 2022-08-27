@@ -18,19 +18,19 @@ export function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
 
   useEffect(() => {
     if (currentUser) {
-        setName(currentUser.name);
-        setDescription(currentUser.about);
+      setName(currentUser.name);
+      setDescription(currentUser.about);
     }
   }, [currentUser]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
     onUpdateUser({
       name,
-      about: description,
+      about: description
     });
-  } 
+  };
 
   return (
     <PopupWithForm

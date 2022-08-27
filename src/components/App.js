@@ -45,11 +45,7 @@ function App() {
 
   return (
     <div className="page">
-      <Header
-        email={email}
-        onSignOut={handleHeaderEntry}
-        loggedIn={loggedIn}
-      />
+      <Header email={email} onSignOut={handleHeaderEntry} loggedIn={loggedIn} />
       <Switch>
         <Route path={routes.SIGN_UP}>
           <Register />

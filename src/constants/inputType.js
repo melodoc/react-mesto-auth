@@ -1,4 +1,4 @@
 export const inputType = {
-    EMAIL: 'email',
-    PASSWORD: 'password'
-}
+  EMAIL: 'email',
+  PASSWORD: 'password'
+};
