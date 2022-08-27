@@ -19,10 +19,14 @@ function App() {
   const history = useHistory();
 
   const [isTokenValid, setIsTokenValid] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [email, setEmail] = useState('');
-  const [isTooltipShown, setIsTooltipShown] = useState(false);
-  const [isTooltipSucceed, setIsTooltipSucceed] = useState(true);
+  const [tooltipInformation, setTooltipInformation] = useState({
+    show: false,
+    succeed: true
+  });
+  const [userInformation, setUserInformation] = useState({
+    email: '',
+    loggedIn: false
+  });
 
   let token = localStorage.getItem('token');
 
@@ -30,8 +34,10 @@ function App() {
     authApiClient
       .checkValidity(token)
       .then((res) => {
-        setEmail(res.data.email);
-        setLoggedIn(true);
+        setUserInformation({
+          email: res.data.email,
+          loggedIn: true
+        });
         setIsTokenValid(true);
         history.push(routes.MAIN);
       })
@@ -47,20 +53,27 @@ function App() {
   };
 
   const handleClose = () => {
-    setIsTooltipShown(false);
+    setTooltipInformation({
+      ...tooltipInformation,
+      show: false
+    });
   };
 
   const handleRegisterSubmit = (email, password) => {
     authApiClient
       .signUp(email, password)
       .then((res) => {
-        setIsTooltipShown(true);
-        setIsTooltipSucceed(true);
+        setTooltipInformation({
+          show: true,
+          succeed: true
+        });
         history.push(routes.SIGN_IN);
       })
       .catch((err) => {
-        setIsTooltipShown(true);
-        setIsTooltipSucceed(false);
+        setTooltipInformation({
+          show: true,
+          succeed: false
+        });
         console.error(err);
       });
   };
@@ -72,14 +85,18 @@ function App() {
         if (signIn.token) {
           localStorage.setItem('token', signIn.token);
           token = signIn.token;
-          setEmail(email);
-          setLoggedIn(true);
+          setUserInformation({
+            email,
+            loggedIn: true
+          });
           history.push(routes.MAIN);
         }
       })
       .catch((err) => {
-        setIsTooltipShown(true);
-        setIsTooltipSucceed(false);
+        setTooltipInformation({
+          show: true,
+          succeed: false
+        });
         console.error(err);
       });
   };
@@ -87,14 +104,14 @@ function App() {
   return (
     <div className="page">
       <InfoTooltip
-        isOpened={isTooltipShown}
+        isOpened={tooltipInformation.show}
         onClose={handleClose}
-        isSuccess={isTooltipSucceed}
+        isSuccess={tooltipInformation.succeed}
       />
       <Header
-        email={email}
+        email={userInformation.email}
         onSignOut={handleHeaderEntry}
-        loggedIn={loggedIn}
+        loggedIn={userInformation.loggedIn}
       />
       <Switch>
         <Route path={routes.SIGN_UP}>
