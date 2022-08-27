@@ -1,29 +1,54 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 import { routes, inputType } from '../constants';
 import { Input } from '../shared-components/Input';
 import { authApiClient } from '../utils/Api';
 import { Header } from './Header';
+import { InfoTooltip } from './InfoTooltip';
 
 export function Register() {
-  const handleChangeName = () => {};
-  const handleChangeDescription = () => {};
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isTooltipShown, setIsTooltipShown] = useState(false);
+  const [isTooltipSucceed, setIsTooltipSucceed] = useState(true);
+
+  const handleChangeEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleChangePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const onClose = () => {
+    setIsTooltipShown(false);
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
 
     authApiClient
-      .signup('email@email.ru', 'test')
+      .signup(email, password)
       .then((res) => {
+        setIsTooltipShown(true);
+        setIsTooltipSucceed(true);
         console.info(res);
       })
       .catch((err) => {
+        setIsTooltipShown(true);
+        setIsTooltipSucceed(false);
         console.error(err);
       });
   };
 
   return (
     <>
+      <InfoTooltip
+        isOpened={isTooltipShown}
+        onClose={onClose}
+        isSuccess={isTooltipSucceed}
+      />
       <Header
         entry={{
           label: 'Войти',
@@ -35,12 +60,12 @@ export function Register() {
         <form className="entry__form" name="entry__form" onSubmit={onSubmit}>
           <Input
             name="Email"
-            handleChange={handleChangeName}
+            handleChange={handleChangeEmail}
             type={inputType.EMAIL}
           />
           <Input
             name="Пароль"
-            handleChange={handleChangeDescription}
+            handleChange={handleChangePassword}
             type={inputType.PASSWORD}
           />
           <button

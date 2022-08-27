@@ -75,7 +75,6 @@ class Api extends BaseApi {
 
 class AuthApi extends BaseApi {
   signup(email, password) {
-    console.info(this.baseUrl, this.headers);
     return this._fetchHandle(this._methods.POST, '/signup', {
       email,
       password
@@ -87,6 +86,31 @@ class AuthApi extends BaseApi {
       email,
       password
     });
+  }
+
+  checkValidity(token) {
+    if (!token) {
+      return Promise.reject('Токен не передан или передан не в том формате');
+    }
+    return fetch(`${this.baseUrl}/users/me`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          return Promise.reject(
+            `Ошибка ${res.status}: С токеном что-то не так`
+          );
+        }
+      })
+      .catch((res) => {
+        return Promise.reject(res);
+      });
   }
 }
 
