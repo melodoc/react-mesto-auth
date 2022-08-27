@@ -51,25 +51,40 @@ class Api extends BaseApi {
   }
 
   deleteCardById(cardId) {
-    return this._fetchHandle(this._methods.DELETE, `/cards/${cardId}`);
+    return this._fetchHandle(
+      this._methods.DELETE,
+      `/cards/${cardId}`
+    );
   }
 
   changeLikeCardStatus(cardId, setLike) {
-    return setLike ? this.setLikeById(cardId) : this.deleteLikeById(cardId);
+    return setLike
+      ? this.setLikeById(cardId)
+      : this.deleteLikeById(cardId);
   }
 
   setLikeById(cardId) {
-    return this._fetchHandle(this._methods.PUT, `/cards/${cardId}/likes`);
+    return this._fetchHandle(
+      this._methods.PUT,
+      `/cards/${cardId}/likes`
+    );
   }
 
   deleteLikeById(cardId) {
-    return this._fetchHandle(this._methods.DELETE, `/cards/${cardId}/likes`);
+    return this._fetchHandle(
+      this._methods.DELETE,
+      `/cards/${cardId}/likes`
+    );
   }
 
   updateUserAvatar(avatar) {
-    return this._fetchHandle(this._methods.PATCH, `/users/me/avatar`, {
-      avatar
-    });
+    return this._fetchHandle(
+      this._methods.PATCH,
+      `/users/me/avatar`,
+      {
+        avatar
+      }
+    );
   }
 }
 
@@ -90,7 +105,9 @@ class AuthApi extends BaseApi {
 
   checkValidity(token) {
     if (!token) {
-      return Promise.reject('Токен не передан или передан не в том формате');
+      return Promise.reject(
+        'Токен не передан или передан не в том формате'
+      );
     }
     return fetch(`${this.baseUrl}/users/me`, {
       method: 'GET',

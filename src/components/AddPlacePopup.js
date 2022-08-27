@@ -2,7 +2,11 @@ import { useState } from 'react';
 import { buttonType } from '../constants';
 import { PopupWithForm } from './PopupWithForm';
 
-export const AddPlacePopup = ({ isOpen, onClose, onAddPlaceSubmit }) => {
+export const AddPlacePopup = ({
+  isOpen,
+  onClose,
+  onAddPlaceSubmit
+}) => {
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
 

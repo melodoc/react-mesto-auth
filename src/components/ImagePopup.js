@@ -12,7 +12,11 @@ export function ImagePopup({ card, onClose }) {
           title="Закрыть"
         />
         <div>
-          <img className="popup__image" src={card?.link} alt={card?.name} />
+          <img
+            className="popup__image"
+            src={card?.link}
+            alt={card?.name}
+          />
           <p className="popup__description">{card?.name}</p>
         </div>
       </div>

@@ -3,7 +3,10 @@ import { Route, Redirect } from 'react-router-dom';
 
 import { routes } from '../constants';
 
-export const ProtectedRoute = ({ component: Component, ...props }) => {
+export const ProtectedRoute = ({
+  component: Component,
+  ...props
+}) => {
   return (
     <Route>
       {() =>

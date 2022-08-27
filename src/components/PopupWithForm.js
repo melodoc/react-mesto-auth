@@ -16,8 +16,14 @@ export function PopupWithForm({
           type="button"
           title="Закрыть"
         />
-        <form className="popup__form" name={`${name}-form`} onSubmit={onSubmit}>
-          <div className={`popup__wrapper popup__wrapper_type_${name}`}>
+        <form
+          className="popup__form"
+          name={`${name}-form`}
+          onSubmit={onSubmit}
+        >
+          <div
+            className={`popup__wrapper popup__wrapper_type_${name}`}
+          >
             <h3 className="popup__heading">{title}</h3>
             {children}
             <button

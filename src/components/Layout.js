@@ -16,9 +16,12 @@ export function Layout() {
   const [currentUser, setCurrentUser] = useState(null);
   const [cards, setCards] = useState(null);
   const [selectedCard, setSelectedCard] = useState(null);
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(null);
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(null);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(null);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
+    useState(null);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] =
+    useState(null);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
+    useState(null);
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(null);
 
   useEffect(() => {

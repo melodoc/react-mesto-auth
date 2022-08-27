@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
+import {
+  Switch,
+  Route,
+  Redirect,
+  useHistory
+} from 'react-router-dom';
 
 import { authApiClient } from '../utils/Api';
 import { routes } from '../constants';
@@ -45,7 +50,11 @@ function App() {
 
   return (
     <div className="page">
-      <Header email={email} onSignOut={handleHeaderEntry} loggedIn={loggedIn} />
+      <Header
+        email={email}
+        onSignOut={handleHeaderEntry}
+        loggedIn={loggedIn}
+      />
       <Switch>
         <Route path={routes.SIGN_UP}>
           <Register />

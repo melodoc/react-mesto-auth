@@ -1,11 +1,15 @@
 export function InfoTooltip({ isOpened, onClose, isSuccess }) {
   const statusClass = `popup__status ${
-    isSuccess ? 'popup__status_state_success' : 'popup__status_state_failed'
+    isSuccess
+      ? 'popup__status_state_success'
+      : 'popup__status_state_failed'
   }`;
 
   return (
     <div
-      className={`popup popup_zoom_image ${isOpened && 'popup_opened'}`}
+      className={`popup popup_zoom_image ${
+        isOpened && 'popup_opened'
+      }`}
       id="info-tooltip"
     >
       <div className="popup__container popup__container_zoom_image">

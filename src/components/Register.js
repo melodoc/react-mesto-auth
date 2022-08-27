@@ -50,7 +50,11 @@ export function Register() {
       />
       <div className="entry">
         <h2 className="entry__title">Регистрация</h2>
-        <form className="entry__form" name="entry__form" onSubmit={onSubmit}>
+        <form
+          className="entry__form"
+          name="entry__form"
+          onSubmit={onSubmit}
+        >
           <Input
             name="Email"
             handleChange={handleChangeEmail}
@@ -71,7 +75,10 @@ export function Register() {
           </button>
           <span className="entry__link">
             Уже зарегистрированы?&nbsp;
-            <Link to={routes.SIGN_IN} className="entry__link_type_redirect">
+            <Link
+              to={routes.SIGN_IN}
+              className="entry__link_type_redirect"
+            >
               Войти
             </Link>
           </span>

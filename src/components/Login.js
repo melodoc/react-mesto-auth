@@ -41,7 +41,11 @@ export function Login({ onLogin }) {
   return (
     <div className="entry">
       <h2 className="entry__title">Вход</h2>
-      <form className="entry__form" name="entry__form" onSubmit={onSubmit}>
+      <form
+        className="entry__form"
+        name="entry__form"
+        onSubmit={onSubmit}
+      >
         <Input
           name="Email"
           handleChange={handleChangeEmail}
