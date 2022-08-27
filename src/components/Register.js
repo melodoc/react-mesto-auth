@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { routes, inputType } from '../constants';
 import { Input } from '../shared-components/Input';
 import { authApiClient } from '../utils/Api';
-import { Header } from './Header';
 import { InfoTooltip } from './InfoTooltip';
 
 export function Register() {
@@ -48,12 +47,6 @@ export function Register() {
         isOpened={isTooltipShown}
         onClose={onClose}
         isSuccess={isTooltipSucceed}
-      />
-      <Header
-        entry={{
-          label: 'Войти',
-          route: routes.SIGN_IN
-        }}
       />
       <div className="entry">
         <h2 className="entry__title">Регистрация</h2>

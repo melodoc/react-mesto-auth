@@ -1,48 +1,74 @@
 import { useState, useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
 
 import { authApiClient } from '../utils/Api';
 import { routes } from '../constants';
 import { Layout } from './Layout';
 import { Login } from './Login';
 import { Register } from './Register';
+import { Header } from './Header';
 import { ProtectedRoute } from './ProtectedRoute'; // импортируем HOC
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const history = useHistory();
+
+  const [isTokenValid, setIsTokenValid] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [email, setEmail] = useState('');
 
   useEffect(() => {
-    setIsLoggedIn(false);
+    setIsTokenValid(false);
     authApiClient
       .checkValidity(localStorage.getItem('token'))
-      .then(() => {
-        setIsLoggedIn(true);
+      .then(({ data }) => {
+        setEmail(data.email);
+        setLoggedIn(true);
+        history.push(routes.MAIN);
       })
       .catch((err) => {
         console.info(err);
       })
       .finally(() => {
-        setIsLoggedIn(true);
+        setIsTokenValid(true);
       });
   }, []);
 
+  const handleHeaderEntry = () => {
+    localStorage.removeItem('token');
+    history.push(routes.SIGN_IN);
+  };
+
+  const handleLogin = (email) => {
+    setEmail(email);
+    setLoggedIn(true);
+  };
+
   return (
-    <Switch>
-      {isLoggedIn && (
-        <ProtectedRoute
-          exact
-          path="/"
-          loggedIn={isLoggedIn}
-          component={Layout}
-        />
-      )}
-      <Route path={routes.SIGN_UP}>
-        <Register />
-      </Route>
-      <Route path={routes.SIGN_IN}>
-        <Login />
-      </Route>
-    </Switch>
+    <div className="page">
+      <Header
+        email={email}
+        onSignOut={handleHeaderEntry}
+        loggedIn={loggedIn}
+      />
+      <Switch>
+        <Route path={routes.SIGN_UP}>
+          <Register />
+        </Route>
+        <Route path={routes.SIGN_IN}>
+          <Login onLogin={handleLogin} />
+        </Route>
+        {!isTokenValid ? (
+          <Redirect to={routes.SIGN_IN} />
+        ) : (
+          <ProtectedRoute
+            exact
+            path="/"
+            loggedIn={isTokenValid}
+            component={Layout}
+          />
+        )}
+      </Switch>
+    </div>
   );
 }
 
