@@ -28,9 +28,8 @@ function App() {
     loggedIn: false
   });
 
-  let token = localStorage.getItem('token');
-
   useEffect(() => {
+    const token = localStorage.getItem('token');
     authApiClient
       .checkValidity(token)
       .then((res) => {
@@ -45,14 +44,14 @@ function App() {
         console.info(err);
         setIsTokenValid(false);
       });
-  }, [token]);
+  }, []);
 
   const handleHeaderEntry = () => {
     localStorage.removeItem('token');
     history.push(routes.SIGN_IN);
   };
 
-  const handleClose = () => {
+  const handleTooltipClose = () => {
     setTooltipInformation({
       ...tooltipInformation,
       show: false
@@ -84,11 +83,11 @@ function App() {
       .then((signIn) => {
         if (signIn.token) {
           localStorage.setItem('token', signIn.token);
-          token = signIn.token;
           setUserInformation({
             email,
             loggedIn: true
           });
+          setIsTokenValid(true);
           history.push(routes.MAIN);
         }
       })
@@ -105,7 +104,7 @@ function App() {
     <div className="page">
       <InfoTooltip
         isOpened={tooltipInformation.show}
-        onClose={handleClose}
+        onClose={handleTooltipClose}
         isSuccess={tooltipInformation.succeed}
       />
       <Header
@@ -120,15 +119,15 @@ function App() {
         <Route path={routes.SIGN_IN}>
           <Login onLogin={handleLoginSubmit} />
         </Route>
-        {!isTokenValid ? (
-          <Redirect to={routes.SIGN_IN} />
-        ) : (
+        {isTokenValid ? (
           <ProtectedRoute
             exact
             path="/"
             loggedIn={isTokenValid}
             component={Layout}
           />
+        ) : (
+          <Redirect to={routes.SIGN_IN} />
         )}
       </Switch>
     </div>
