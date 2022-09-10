@@ -1,35 +1,46 @@
-# Проект: Место
+# Project: Mesto
 
-## Описание
+## Link
 
-Сайт куда можно добавлять фотографии, удалять их и ставить лайки. [Ссылка на макет в Figma](https://www.figma.com/file/PSdQFRHoxXJFs2FH8IXViF/JavaScript.-Sprint-9)
+[Mesto](https://melodoc.github.io/react-mesto-auth/)
 
-## Технологии в проекте
+## Description
+
+A site where you can add photos, delete them and put likes. The app was made using React with authorization and registration
+
+[Figma](https://www.figma.com/file/PSdQFRHoxXJFs2FH8IXViF/JavaScript.-Sprint-9)
+
+## Technologies in the project
 
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-ffd24a?style=for-the-badge&logo=javascript&logoColor=white) ![React](https://img.shields.io/badge/-ReactJs-61DAFB?logo=react&logoColor=white&style=for-the-badge)
 
-## Установка
+## How to install
 
 ``` shell
 npm install
 ```
 
-## Запуск
+## How to run application
 
 ``` shell
 npm start
 ```
 
-Приложение «Место» загрузится на http://localhost:3000.
+Mesto application will boot op on http://localhost:3000.
 
-## Сборка приложения
+## Build application
 
 ``` shell
 npm run build
 ```
 
-Это создаст папку dist со скомпилированными и свернутыми компонентами.
+This will create a dist folder with compiled and minimised components.
 
-## Авторы
+## The authors
 
-Сделано в рамках прохождения курса **Веб-разработчик** Яндекс Практикум
+Made by melodoc as part of the course **Web Developer** by Yandex.Practicum
+
+## Feature plans
+
+- add localization
+- redesign main page
